@@ -66,43 +66,53 @@ export default function TableList() {
     if (isAllChecked === true) {
       //When all checkboxes are checked.
       setTableHeaderIsChecked(true);
+      localStorageService.setItem("header_check", true);
     } else {
       //Not all checkboxes are checked.
       setTableHeaderIsChecked(false);
+      localStorageService.setItem("header_check", false);
     }
 
     setHrList(hrListArray);
+    localStorageService.setItem("hr_list", hrListArray);
     updateFilteredUserList();
   };
 
+  //Event handler for checkbox in table header.
   const handleCheckBoxHeaderChange = (event) => {
     var hrListArray = hrList;
     for (let i = 0; i < hrListArray.length; i++) {
       hrListArray[i][0] = event.target.checked;
     }
+
     setHrList(hrListArray);
+    localStorageService.setItem("hr_list", hrListArray);
     setTableHeaderIsChecked(event.target.checked);
+    localStorageService.setItem("header_check", event.target.checked);
     updateFilteredUserList();
   };
 
+  //Update display user list by checked departments.
   const updateFilteredUserList = () => {
     var filteredResult = [];
     for (let i = 0; i < hrList.length; i++) {
       if (hrList[i][0] === true) {
+        //Department is checked.
         for (let j = 0; j < userList.length; j++) {
           if (userList[j][5] === hrList[i][2]) {
+            //Find user from user list by department.
             filteredResult.push(userList[j]);
-            console.log(userList[j][5]);
           }
         }
       }
     }
 
     setFilteredUserList(filteredResult);
-    console.log(filteredResult);
+    localStorageService.setItem("filtered_user", filteredResult);
   };
 
-  const initiatData = () => {
+  //initiate
+  const initiateData = () => {
     // Fetch departments
     var hrListArray = [];
 
@@ -144,11 +154,20 @@ export default function TableList() {
       });
 
     setFilteredUserList([]);
+    localStorageService.setItem("filtered_user", []);
     setTableHeaderIsChecked(false);
+    localStorageService.setItem("header_check", false);
   };
 
   useEffect(() => {
-    initiatData();
+    if (localStorageService.getItem("hr_list")) {
+      setHrList(localStorageService.getItem("hr_list"));
+      setUserList(localStorageService.getItem("user_list"));
+      setFilteredUserList(localStorageService.getItem("filtered_user"));
+      setTableHeaderIsChecked(localStorageService.getItem("header_check"));
+    } else {
+      initiateData();
+    }
   }, []);
 
   return (
@@ -173,7 +192,7 @@ export default function TableList() {
             />
           </CardBody>
           <CardFooter>
-            <Button color="primary" onClick={initiatData}>
+            <Button color="primary" onClick={initiateData}>
               Refresh Data
             </Button>
           </CardFooter>
