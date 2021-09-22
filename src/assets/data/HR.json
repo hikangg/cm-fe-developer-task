@@ -1,0 +1,46 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "department": "hr",
+      "location": "Dublin",
+      "manager": { "name": { "first": "John", "last": "Rice" } }
+    },
+    {
+      "id": 2,
+      "department": "technology",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Anita", "last": "Long" } }
+    },
+    {
+      "id": 3,
+      "department": "accounting",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Jonathan", "last": "Castillo" } }
+    },
+    {
+      "id": 4,
+      "department": "Helpdesk",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Esteban", "last": "Martinez" } }
+    },
+    {
+      "id": 5,
+      "department": "facilities",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Michael", "last": "Ortiz" } }
+    },
+    {
+      "id": 6,
+      "department": "operations",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Izabel", "last": "Murphy" } }
+    },
+    {
+      "id": 7,
+      "department": "sales",
+      "location": "Dublin",
+      "manager": { "name": { "first": "Frida", "last": "Peterson" } }
+    }
+  ]
+}
