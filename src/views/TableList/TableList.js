@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import hrData from "../../assets/data/HR.json";
 import localStorageService from "services/localStorageService";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -120,14 +119,16 @@ export default function TableList() {
     // Fetch departments
     var hrListArray = [];
 
-    hrData["departments"].map((item) => {
-      hrListArray.push([
-        false,
-        item.id + "",
-        item.department,
-        item.location,
-        item.manager.name.first + " " + item.manager.name.last,
-      ]);
+    axios.get("/api/hr/all").then((response) => {
+      response.data.map((item) => {
+        hrListArray.push([
+          false,
+          item.id + "",
+          item.department,
+          item.location,
+          item.manager.name.first + " " + item.manager.name.last,
+        ]);
+      });
     });
 
     setHrList(hrListArray);

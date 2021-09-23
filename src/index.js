@@ -18,6 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import "./mock-db";
 
 // core components
 import Admin from "layouts/Admin.js";
