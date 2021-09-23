@@ -38,9 +38,7 @@ export default function CustomTable(props) {
                     checked={tableHeaderIsChecked}
                   />
                 </TableCell>
-              ) : (
-                ""
-              )}
+              ) : null}
               {tableHead.map((prop, key) => {
                 return (
                   <TableCell
@@ -65,9 +63,7 @@ export default function CustomTable(props) {
                       onChange={handleCheckBoxChange(key)}
                     />
                   </TableCell>
-                ) : (
-                  ""
-                )}
+                ) : null}
                 {prop.map((prop, key) => {
                   if (key !== 0 || tableChecked !== true) {
                     return (
@@ -101,7 +97,7 @@ CustomTable.propTypes = {
     "gray",
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.array,
   tableChecked: PropTypes.bool,
   tableHeaderIsChecked: PropTypes.bool,
   handleCheckBoxChange: PropTypes.func,
