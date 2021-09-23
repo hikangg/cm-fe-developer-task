@@ -63,6 +63,7 @@ export default function TableList() {
     for (let i = 0; i < hrListArray.length; i++) {
       isAllChecked = isAllChecked && hrListArray[i][0];
     }
+
     if (isAllChecked === true) {
       //When all checkboxes are checked.
       setTableHeaderIsChecked(true);
@@ -75,6 +76,7 @@ export default function TableList() {
 
     setHrList(hrListArray);
     localStorageService.setItem("hr_list", hrListArray);
+
     updateFilteredUserList();
   };
 
@@ -87,8 +89,10 @@ export default function TableList() {
 
     setHrList(hrListArray);
     localStorageService.setItem("hr_list", hrListArray);
+
     setTableHeaderIsChecked(event.target.checked);
     localStorageService.setItem("header_check", event.target.checked);
+
     updateFilteredUserList();
   };
 
@@ -132,7 +136,9 @@ export default function TableList() {
     // Fetch user from API.
     var userListArray = [];
     axios
-      .get("https://randomuser.me/api/?seed={department}&results=10")
+      .get(
+        process.env.REACT_APP_RANDOMUSER_API + "?seed={department}&results=10"
+      )
       .then((response) => {
         response.data.results.map((item) => {
           userListArray.push([
@@ -155,6 +161,7 @@ export default function TableList() {
 
     setFilteredUserList([]);
     localStorageService.setItem("filtered_user", []);
+
     setTableHeaderIsChecked(false);
     localStorageService.setItem("header_check", false);
   };
